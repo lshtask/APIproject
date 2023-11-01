@@ -1,20 +1,12 @@
 <template>
-  <pro-layout
-    v-model:collapsed="state.collapsed"
-    v-model:selectedKeys="state.selectedKeys"
-    v-model:openKeys="state.openKeys"
-    :loading="loading"
-    :menu-data="menuData"
-    :breadcrumb="{ routes: breadcrumb }"
-    disable-content-margin
-    style="min-height: 100vh"
-    iconfont-url="//at.alicdn.com/t/font_2804900_2sp8hxw3ln8.js"
-    v-bind="proConfig"
-  >
+  <pro-layout v-model:collapsed="state.collapsed" v-model:selectedKeys="state.selectedKeys"
+    v-model:openKeys="state.openKeys" :loading="loading" :menu-data="menuData" :breadcrumb="{ routes: breadcrumb }"
+    disable-content-margin style="min-height: 100vh" iconfont-url="//at.alicdn.com/t/font_2804900_2sp8hxw3ln8.js"
+    v-bind="proConfig">
     <template #menuHeaderRender>
       <router-link :to="{ path: '/' }">
         <img src="https://alicdn.antdv.com/v2/assets/logo.1ef800a8.svg" />
-        <h1>Preview Pro</h1>
+        <h1>API</h1>
       </router-link>
     </template>
     <template #rightContentRender>
@@ -32,8 +24,9 @@
       </router-link>
     </template>
     <SettingDrawer v-model="proConfig" />
-    <RouterView v-slot="{ Component, route }">
-      <transition name="slide-left" mode="out-in">
+    <RouterView v-slot="{ Component, route }" >
+      <!-- mode="out-in" -->
+      <transition name="slide-left"  >
         <component :is="Component" :key="route.path" />
       </transition>
     </RouterView>
@@ -44,6 +37,7 @@
 import { useRouter, RouterView, RouterLink } from 'vue-router';
 import { getMenuData, clearMenuItem, type RouteContextProps } from '@ant-design-vue/pro-layout';
 import { SmileOutlined, HeartOutlined } from '@ant-design/icons-vue';
+import { computed, reactive, ref, watch } from 'vue';
 
 const router = useRouter();
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
@@ -86,3 +80,4 @@ watch(
   },
 );
 </script>
+

@@ -16,6 +16,6 @@ module.exports = {
   },
   rules: {
     // all rules docs https://eslint.org/docs/rules/
-    'prettier/prettier': ['error', { semi: true, singleQuote: true, printWidth: 120 }],
+    'prettier/prettier': ['off', { semi: true, singleQuote: true, printWidth: 100 }],
   },
 };
