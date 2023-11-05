@@ -25,8 +25,8 @@
     </template>
     <SettingDrawer v-model="proConfig" />
     <RouterView v-slot="{ Component, route }" >
-      <!-- mode="out-in" -->
-      <transition name="slide-left"  >
+      <!-- mode="out-in"  -->
+      <transition name="slide-left" >
         <component :is="Component" :key="route.path" />
       </transition>
     </RouterView>

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router
 import BasicLayout from '../layouts/BasicLayout.vue';
 import HomePage from '@/views/HomePage/HomePage.vue';
 import InterfaceSquare from '@/views/InterfaceSquare/InterfaceSquare.vue';
+import InterfaceManagement from '@/views/InterfaceManagement/InterfaceManagement.vue';
 
 
 const hasGithubPages = import.meta.env.VITE_GHPAGES;
@@ -25,15 +26,18 @@ export default createRouter({
         {
           path: '/interfacesquare',
           name: 'interfacesquare',
+          // hideChildrenInMenu: true,
           meta: { title: '接口广场', icon: 'icon-icon-test' },
           component: InterfaceSquare,
+          
         },
         {
-          path: '/interfacemanagement',
-          name: 'interfacemanagement',
-          meta: { title: '接口管理', icon: 'icon-icon-test' },
-          component: InterfaceSquare,
-        },
+              path: '/interfacemanagement',
+              name: 'interfacemanagement',
+              meta: { title: '接口管理', icon: 'icon-icon-test', hidden: true },
+              component: InterfaceManagement,
+              
+            },
         {
           path: '/interfaceanalysis',
           name: 'interfaceanalysis',

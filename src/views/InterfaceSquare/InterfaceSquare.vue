@@ -21,80 +21,19 @@
       </a-input>
     </div>
     <div class="container_fotter">
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
+      <n-card v-for="(item, index) in interfaceSquareCard" :key="index" class="container_fotter_card" :title="item.title"
+        hoverable @click="handleCardClick(index)">
         <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
+          <n-badge :value="item.times" :max="15">
             <n-avatar />
           </n-badge>
-          <p>获取土味情话</p>
+          <p>{{ item.description }}</p>
         </div>
-      </n-card>
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
-        <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
-            <n-avatar />
-          </n-badge>
-          <p>获取土味情话</p>
-        </div>
-      </n-card>
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
-        <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
-            <n-avatar />
-          </n-badge>
-          <p>获取土味情话</p>
-        </div>
-      </n-card>
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
-        <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
-            <n-avatar />
-          </n-badge>
-          <p>获取土味情话</p>
-        </div>
-      </n-card>
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
-        <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
-            <n-avatar />
-          </n-badge>
-          <p>获取土味情话</p>
-        </div>
-      </n-card>
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
-        <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
-            <n-avatar />
-          </n-badge>
-          <p>获取土味情话</p>
-        </div>
-      </n-card>
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
-        <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
-            <n-avatar />
-          </n-badge>
-          <p>获取土味情话</p>
-        </div>
-      </n-card>
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
-        <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
-            <n-avatar />
-          </n-badge>
-          <p>获取土味情话</p>
-        </div>
-      </n-card>
-      <n-card class="container_fotter_card" title="随机土味情话" hoverable>
-        <div class="container_fotter_card_content">
-          <n-badge :value="10" :max="15">
-            <n-avatar />
-          </n-badge>
-          <p>获取土味情话</p>
-        </div>
-      </n-card>
-    </div>
 
+      </n-card>
+
+      <InterfaceManagement :active="active" :data="data" />
+    </div>
   </div>
 
   <AudioMask :open="open" />
@@ -104,11 +43,38 @@
 import { ref } from "vue";
 import AudioMask from "./AudioMask.vue";
 import { useAudioStore } from "@/store";
+import InterfaceManagement from "../InterfaceManagement/InterfaceManagement.vue";
 
 const audioStore = useAudioStore()
 
 const open = ref<boolean>(false)
+const active = ref<boolean>(false)
 const inputvalue = ref<string>('')
+const data = ref<any>()
+const interfaceSquareCard = ref<any>([
+  {
+    title: '随机土味情话',
+    avtar: '',
+    description: '获取土味情话',
+    interfaceURl: 'https://gateway.qimuu.icu/api/loveTalk',
+    times: '647',
+    responceType: 'JSON',
+    requestType: 'GET',
+    interfaceStatus: '已上线',
+    consumption: '1'
+  },
+  {
+    title: '天气情况',
+    avtar: '',
+    description: '获取天气情况',
+    interfaceURl: 'https://gateway.qimuu.icu/api/loveTalk',
+    times: '120',
+    responceType: 'JSON',
+    requestType: 'POST',
+    interfaceStatus: '已上线',
+    consumption: '1'
+  }
+])
 
 const startRecording = () => {
   const recognition = new webkitSpeechRecognition();
@@ -140,6 +106,14 @@ const handleInputChange = (e) => {
   inputvalue.value = e.target.value
 }
 
+const handleCardClick = (index: number) => {
+  data.value = interfaceSquareCard.value[index]
+
+  active.value = !active.value
+
+}
+
+
 </script>
 
 <style scoped lang="less">
@@ -150,7 +124,7 @@ const handleInputChange = (e) => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: url('../../assets/back.png');
+  // background-image: url('../../assets/back.png');
 
   &_head {
     height: 20%;
@@ -187,9 +161,10 @@ const handleInputChange = (e) => {
       width: 20%;
       height: 200px;
       margin: 20px;
-
+      cursor: pointer;
     }
 
   }
 
-}</style>
+}
+</style>

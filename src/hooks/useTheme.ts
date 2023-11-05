@@ -14,6 +14,7 @@ export const colors: string[] = [
   '#eb2f96',
   '#faad14',
   '#52c41a',
+  '#1C9346'
 ];
 
 export const useUserTheme = () => {

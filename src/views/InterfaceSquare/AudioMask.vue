@@ -59,10 +59,13 @@ const handleOpenClick = () => {
 
 @keyframes audio_text {
   0% {
-    opacity: 0.1;
+    opacity: 0;
+  }
+  33% {
+    opacity: 0.2;
   }
 
-  50% {
+  66% {
     opacity: 0.5;
   }
 
